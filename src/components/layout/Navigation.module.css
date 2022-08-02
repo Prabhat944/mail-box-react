@@ -1,0 +1,46 @@
+.navigation{
+    display: flex;
+    background-color: orangered;
+    height: 60px;
+    width:100vw;
+    position: sticky;
+    top:0;
+    z-index: 999;
+}
+.logoContainer{
+    flex:2;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.logo{
+    width: fit-content;
+    margin: auto;
+    color: aqua;
+    font-size: 30px;
+    font-weight: bold;
+}
+.pagesContainer{
+    flex:5;
+}
+.pagesContainer ul{
+    list-style: none;
+    display: flex;
+    gap:30px;
+}
+.home{
+    color:black;
+    font-size: 18px;
+}
+.product{
+    color:black;
+    font-size: 18px;
+}
+.about{
+    color:black;
+    font-size: 18px;
+}
+.isLogin{
+    flex:5;
+  
+}
