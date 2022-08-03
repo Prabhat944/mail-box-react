@@ -1,21 +1,28 @@
+import { useHistory } from 'react-router-dom';
 import styles from './Login.module.css';
-import {useRef} from 'react';
+import {useRef, useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store';
 
 const Login=()=>{
+    const [isLogin,setIsLogin]=useState(true);
  const emailRef=useRef();
  const passwordRef=useRef();
  const confirmPasswordRef=useRef();
+ const history=useHistory();
+ const dispatch=useDispatch()
 
  const LoginHandler=async(event)=>{
     event.preventDefault();
     const email=emailRef.current.value;
     const password=passwordRef.current.value;
-    const confirmpassword=confirmPasswordRef.current.value;
-    if(password !== confirmpassword ){
+    const confirmpassword=isLogin?'':confirmPasswordRef.current.value;
+    if(password !== confirmpassword && !isLogin){
         alert('Please Enter Same Password');
         return;
     }
-    await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDfEOGsnYBHkldzzfQzt2iV0-mP_YPZtGY',{
+    const Url=isLogin?'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDfEOGsnYBHkldzzfQzt2iV0-mP_YPZtGY':'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDfEOGsnYBHkldzzfQzt2iV0-mP_YPZtGY';
+    await fetch(Url,{
         method:'POST',
         body:JSON.stringify({
             email:email,
@@ -27,7 +34,16 @@ const Login=()=>{
         }
     }).then(res=>{
         if(res.ok){
-          res.json().then(data=>console.log('User has successfully signed up.'));
+          res.json().then((data)=>{
+            setIsLogin(true);
+            console.log(isLogin?'Login Successful':'User has successfully signed up');
+            console.log(data);
+            dispatch(authActions.loginHandler({
+                token:data.idToken
+            }))
+              
+            history.replace('/login/home');
+          })
         }else{
             return res.json().then(data=>{
                 let error='Authentication Failed';
@@ -44,20 +60,21 @@ const Login=()=>{
              <img src='corner.jpg' alt='corner'/>
         <div className={styles.formContainer}>
             <form className={styles.form} onSubmit={LoginHandler}>
-                <div className={styles.loginType}><span className={styles.type}>SignUP</span></div>
+                <div className={styles.loginType}><span className={styles.type}>{isLogin?'Login':'SignUP'}</span></div>
                 <div className={styles.inputs}>
                     <input type='text' placeholder='Email' ref={emailRef} required/>
                     <input type='password' placeholder='Password' ref={passwordRef} required/>
-                    <input type='password' placeholder='Confirm Password' ref={confirmPasswordRef} required/>
+                    {!isLogin && <input type='password' placeholder='Confirm Password' ref={confirmPasswordRef} required/>}
                 </div>
                 <div className={styles.btn}>
                     <div className={styles.btnType}>
-                        <button>SignUp</button>
+                        <button>{isLogin?'login':'SignUp'}</button>
+                        {isLogin && <span className={styles.forget}>forget password</span>}
                         
                     </div>
                 </div>
             </form>
-            <div className={styles.userType}><span>Have an account?SignIn</span></div>
+            <div className={styles.userType}><span onClick={()=>setIsLogin((prev)=>!prev)}>{isLogin?"Don't have an account?SignUp":'Have an account?SignIn'}</span></div>
         </div>
         </div>
     )

@@ -6,7 +6,7 @@ const Layout=(props)=>{
 
     return(
         <>
-        <Navigation />
+        <Navigation isLogin={props.isLogin}/>
         <div className={styles.body}>{props.children}</div>
         </>
     )

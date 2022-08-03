@@ -28,6 +28,10 @@
     display: flex;
     gap:30px;
 }
+.link{
+    text-decoration: none;
+    color: black;
+}
 .home{
     color:black;
     font-size: 18px;
@@ -42,5 +46,19 @@
 }
 .isLogin{
     flex:5;
-  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login{
+   cursor: pointer;
+   width:100px;
+   height:30px;
+   text-align: center;
+   border:2px solid black;
+   font-size: 18px;
+   font-weight: bold;
+   color:black;
+   border-radius: 5px;
+   background-color:rgb(255, 213, 140);
 }
