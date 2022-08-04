@@ -37,7 +37,7 @@ const Login=()=>{
           res.json().then((data)=>{
             setIsLogin(true);
             console.log(isLogin?'Login Successful':'User has successfully signed up');
-            console.log(data);
+            
             dispatch(authActions.loginHandler({
                 token:data.idToken,
                 email:data.email

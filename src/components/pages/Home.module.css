@@ -45,6 +45,7 @@
     font-size: 18px;
     border-radius: 7px;
     cursor: pointer;
+    position: relative;
 }
 .left button:hover,
 .left button:focus{
@@ -53,4 +54,13 @@
 .userSectionRight{
     flex:8;
     min-height:calc(100vh - 115px);
+}
+.unseen{
+    position: absolute;
+    min-width:20px;
+    height:20px;
+    background-color: rgb(42, 87, 221);
+    border-radius: 30%;
+    font-size: 19px;
+    right:15%;
 }

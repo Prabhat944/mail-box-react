@@ -1,8 +1,10 @@
 import styles from './MailPage.module.css';
 import TextEditor from '../UI/TextEditor';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch} from 'react-redux';
 import { SendMail } from '../../store/MailAction';
+import { userAction } from '../../store/userServer';
+import { useHistory } from 'react-router-dom';
 
  
 const config={
@@ -11,19 +13,14 @@ const config={
     
 };
 
-let user=null;
+
 const MailPage=(props)=>{
     const dispatch=useDispatch();
+    const history=useHistory();
     const [value,setValue]=useState('');
     const EmailRef=useRef();
     const SubjectRef=useRef();
-    console.log(value)
-    console.log(user)
-    useEffect(()=>{
-       if(localStorage.getItem('Email')){
-        user=localStorage.getItem('Email').replace(/[^a-zA-Z0-9]/g,'');
-       }
-    },[])
+
     const SendMailHandler=(event)=>{
         event.preventDefault();
         const email=EmailRef.current.value;
@@ -32,11 +29,13 @@ const MailPage=(props)=>{
         const body={
             email:email,
             subject:subject,
-            message:message
+            message:message,
+            seen:false
         }
         const ToEmail=email.replace(/[^a-zA-Z0-9]/g,'');
+        dispatch(userAction.updatestatus({type:'loading',msg:"...Loading"}));
        dispatch(SendMail(ToEmail,body));
-        
+        history.push('/login/home');
     }
     return(
         <div className={styles.container}>

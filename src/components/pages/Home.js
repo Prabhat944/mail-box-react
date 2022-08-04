@@ -2,13 +2,15 @@ import {useState} from 'react';
 import MailPage from './MailPage';
 import Inbox from './Inbox';
 import styles from './Home.module.css';
+import { useSelector } from 'react-redux';
 const Home=()=>{
    const [userinput,setUserInput]=useState({
       newmail:false,
       sentbox:false,
       inbox:false
    })
-   console.log(userinput.newmail ,userinput.sentbox, userinput.inbox)
+    const unseen=useSelector(state=>state.user.unseenMsg);
+
     return(
             <div className={styles.container}>
                 <div className={styles.topSection}>
@@ -26,7 +28,7 @@ const Home=()=>{
                             <button onClick={()=>{setUserInput({newmail:false,sentbox:true,inbox:false})}}>Sent Box</button>    
                         </div>
                         <div className={styles.left}>
-                            <button onClick={()=>{setUserInput({newmail:false,sentbox:false,inbox:true})}}>Inbox</button>    
+                            <button onClick={()=>{setUserInput({newmail:false,sentbox:false,inbox:true})}}>Inbox<span className={styles.unseen}>{unseen}</span></button>    
                         </div>
                     </div>
                     <div className={styles.userSectionRight}>

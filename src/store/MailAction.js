@@ -9,15 +9,18 @@ export const SendMail=(ToEmail,body)=>{
                 body:JSON.stringify(body),
             });
             if(!response.ok){
+                dispatch(userAction.updatestatus({type:'failed',msg:"Failed"}));
                 throw new Error('Failed to send Email');
             }
             const data =response.json();
             return data
         }
         try{const mailOutput=await SendingMail();
-        console.log('SuccessFuly Sent',mailOutput);}
+        console.log('SuccessFuly Sent',mailOutput);
+        dispatch(userAction.updatestatus({type:'success',msg:"Successfully Sent"}))}
         catch{
             throw new Error('Failed');
+            
         }
     }
 };
@@ -46,6 +49,25 @@ export const updateinbox=(user)=>{
     }
 };
 
+export const updateSeenMsg=(user,id,body)=>{
+    return async(dispatch)=>{
+        const SeenUpdate=async()=>{
+            const response=await fetch(`https://mail-box-7373c-default-rtdb.firebaseio.com/${user}/email/${id}.json`,{
+                method:'PUT',
+                body:JSON.stringify(body),
+            });
+            if(!response.ok){
+                throw new Error('Unable to update seen msg');
+            }
+            const data=response.json();
+            return data;
+        }
+        try{
+            await SeenUpdate();
+        }
+        catch{throw new Error('Failed to update seen')}
+    }
+}
 
 export const SentBox=(username,id)=>{
     return async(dispatch)=>{

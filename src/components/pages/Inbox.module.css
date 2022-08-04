@@ -24,3 +24,30 @@
     font-size: 17px;
     font-weight: bold;
 }
+.messageList{
+    cursor: pointer;
+    margin-left: 10px;
+}
+.messageList:hover,
+.messageList:focus{
+    cursor: pointer;
+    background-color: orangered;
+}
+.seen{
+    width:10px;
+    height:10px;
+    border-radius: 5px;
+    background-color: white;
+    position: relative;
+    top: 17px;
+    right:15px;
+}
+.notseen{
+    width:10px;
+    height:10px;
+    border-radius: 5px;
+    background-color:blue;
+    position: relative;
+    top: 17px;
+    right:15px;
+}

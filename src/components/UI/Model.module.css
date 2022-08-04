@@ -12,13 +12,15 @@
    top:80px;
     left:9%;
     right: 9%;
+    min-height: 500px;
     width:80%;
-    height:calc(100vh - 100px);
+    height:calc(100vh - 120px);
     background-color: white;
     border-radius: 15px;
+    padding:10px;
     border:3px solid black;
     box-shadow: 0 2px 18px rgba(243, 76, 10, 0.848);
     z-index: +30;
     animation: slide-down 300ms ease-out forwards;
-    overflow:auto;
+
 }

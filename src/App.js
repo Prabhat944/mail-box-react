@@ -6,7 +6,8 @@ import ForgetPassword from './components/pages/ForgetPassword';
 import NotReady from './components/pages/NotReady';
 import { useEffect,useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { updateinbox } from './store/MailAction';
+import { updateinbox} from './store/MailAction';
+import { userAction } from './store/userServer';
 
 const token=localStorage.getItem('Token');
 function App() {
@@ -14,23 +15,29 @@ function App() {
   const dispatch=useDispatch();
   const login=useSelector(state=>state.auth.login);
   const email=useSelector(state=>state.auth.email);
+  const update=useSelector(state=>state.user.update);
+
   useEffect(()=>{
     const user=email.replace(/[^a-zA-z0-9]/g,'');
     setTimeout(()=>{
-      if(user){
-        dispatch(updateinbox(user));
-      }
-    },1000) 
-  },[dispatch,email])
+      if(user){dispatch(updateinbox(user));}
+       },500);
+    setTimeout(()=>{
+        dispatch(userAction.update());
+       },10000);
+  },[dispatch,email,update])
+
   useEffect(()=>{
-  if(login){
-    setIsLogin(true)
-  }
+  if(login){setIsLogin(true)}
   },[login])
+
   const LogoutHandler=()=>{
     setIsLogin(false);
   }
+ 
   console.log(isLogin);
+
+
   return (
      <Layout isLogin={isLogin} logout={LogoutHandler}>
       <Switch>
