@@ -19,6 +19,7 @@
     color: aqua;
     font-size: 30px;
     font-weight: bold;
+    cursor: pointer;
 }
 .pagesContainer{
     flex:5;
@@ -43,6 +44,11 @@
 .about{
     color:black;
     font-size: 18px;
+}
+.active:hover,
+.active.active{
+    color: white;
+    font-size: 20px;
 }
 .isLogin{
     flex:5;

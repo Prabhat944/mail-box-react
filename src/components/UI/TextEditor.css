@@ -1,0 +1,21 @@
+.jodit-status-bar{
+    visibility: hidden;
+}
+.jodit-container:not(.jodit_inline) {
+    border: none;
+}
+.jodit, .jodit *, .jodit-container, .jodit-container * {
+    -webkit-box-sizing: none; 
+    box-sizing: none;
+}
+.jodit .jodit-workplace .jodit-wysiwyg, .jodit .jodit-workplace .jodit-wysiwyg_iframe, .jodit-container .jodit-workplace .jodit-wysiwyg, .jodit-container .jodit-workplace .jodit-wysiwyg_iframe {
+    min-height: 250px;
+    width: 100%;
+}
+.jodit-container:not(.jodit_inline) .jodit-wysiwyg {
+    margin:0;
+    outline: 0;
+    overflow-x: auto;
+    padding: 8px;
+    position: relative;
+}

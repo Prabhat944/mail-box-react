@@ -1,12 +1,56 @@
 .container{
     width:100%;
-    height:60px;
+    height: 100%;
     display:flex;
-    align-items: center;
+    flex-direction: column;
+}
+.topSection{
     border-bottom: 3px solid grey;
+    height: 50px;
+    width: 100%;
 }
 .welcome{
+    width: fit-content;
+    height:fit-content;
+    margin: auto;
+}
+.welcomeMsg{
     font-size: 30px;
     margin-left: 30px;
     font-weight: bold;
+}
+.userSection{
+    display: flex;
+}
+.userSectionLeft{
+    flex:2;
+    height:calc(100vh - 115px);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    border-bottom: 2px solid orangered;
+    border-right: 2px solid orangered;
+    border-radius: 15px;
+
+}
+
+.left button{
+    width:100%;
+    height:30px;
+    border:none;
+    border-bottom: 2px solid gray;
+    background-color: rgba(251, 101, 47, 0.726);
+    color:white;
+    font-size: 18px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.left button:hover,
+.left button:focus{
+    background-color: rgb(255, 92, 33);
+}
+.userSectionRight{
+    flex:8;
+    min-height:calc(100vh - 115px);
 }

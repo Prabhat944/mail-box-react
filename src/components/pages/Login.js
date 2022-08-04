@@ -11,7 +11,7 @@ const Login=()=>{
  const confirmPasswordRef=useRef();
  const history=useHistory();
  const dispatch=useDispatch()
-
+ 
  const LoginHandler=async(event)=>{
     event.preventDefault();
     const email=emailRef.current.value;
@@ -39,7 +39,8 @@ const Login=()=>{
             console.log(isLogin?'Login Successful':'User has successfully signed up');
             console.log(data);
             dispatch(authActions.loginHandler({
-                token:data.idToken
+                token:data.idToken,
+                email:data.email
             }))
               
             history.replace('/login/home');
@@ -55,6 +56,7 @@ const Login=()=>{
         }
     })
  }
+
     return(
         <div className={styles.container}>
              <img src='corner.jpg' alt='corner'/>
@@ -69,7 +71,7 @@ const Login=()=>{
                 <div className={styles.btn}>
                     <div className={styles.btnType}>
                         <button>{isLogin?'login':'SignUp'}</button>
-                        {isLogin && <span className={styles.forget}>forget password</span>}
+                        {isLogin && <span className={styles.forget} onClick={()=>history.push('/login/forgetpassword')}>forget password</span>}
                         
                     </div>
                 </div>
