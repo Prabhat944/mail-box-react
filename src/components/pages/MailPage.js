@@ -34,8 +34,8 @@ const MailPage=(props)=>{
             subject:subject,
             message:message
         }
-        
-       dispatch(SendMail(user,body));
+        const ToEmail=email.replace(/[^a-zA-Z0-9]/g,'');
+       dispatch(SendMail(ToEmail,body));
         
     }
     return(
@@ -48,10 +48,10 @@ const MailPage=(props)=>{
                 </div>
                 <div className={styles.subject}><input  type='text' placeholder='Subject' ref={SubjectRef}/></div>
                 <div className={styles.middlebody} >
-                        <TextEditor  
+                    <TextEditor  
                         setValue={setValue}
                         config={config}
-                        />
+                    />
                 </div>
                 <div className={styles.lowerbody}>
                 <div className={styles.btn}>

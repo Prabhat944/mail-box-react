@@ -5,12 +5,23 @@ import Home from "./components/pages/Home";
 import ForgetPassword from './components/pages/ForgetPassword';
 import NotReady from './components/pages/NotReady';
 import { useEffect,useState } from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import { updateinbox } from './store/MailAction';
 
 const token=localStorage.getItem('Token');
 function App() {
   const [isLogin,setIsLogin]=useState(token?true:false);
-  const login=useSelector(state=>state.login);
+  const dispatch=useDispatch();
+  const login=useSelector(state=>state.auth.login);
+  const email=useSelector(state=>state.auth.email);
+  useEffect(()=>{
+    const user=email.replace(/[^a-zA-z0-9]/g,'');
+    setTimeout(()=>{
+      if(user){
+        dispatch(updateinbox(user));
+      }
+    },1000) 
+  },[dispatch,email])
   useEffect(()=>{
   if(login){
     setIsLogin(true)

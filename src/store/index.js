@@ -1,4 +1,5 @@
 import {createSlice,configureStore} from '@reduxjs/toolkit';
+import userSlice from './userServer';
 
 const Token=localStorage.getItem('Token');
 const Email=localStorage.getItem('Email');
@@ -23,7 +24,7 @@ reducers:{
 });
 
 const store=configureStore({
-    reducer:authSlice.reducer
+    reducer:{auth:authSlice.reducer,user:userSlice}
 });
 
 export const authActions=authSlice.actions;

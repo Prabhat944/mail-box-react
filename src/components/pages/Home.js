@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import MailPage from './MailPage';
+import Inbox from './Inbox';
 import styles from './Home.module.css';
 const Home=()=>{
    const [userinput,setUserInput]=useState({
@@ -19,7 +20,7 @@ const Home=()=>{
                 <div className={styles.userSection}>
                     <div className={styles.userSectionLeft}>
                         <div className={styles.left}>
-                            <button activeclassName={styles.active} onClick={()=>{setUserInput({newmail:true,sentbox:false,inbox:false})}}>Send New Mail</button>    
+                            <button onClick={()=>{setUserInput({newmail:true,sentbox:false,inbox:false})}}>Send New Mail</button>    
                         </div>
                         <div className={styles.left}>
                             <button onClick={()=>{setUserInput({newmail:false,sentbox:true,inbox:false})}}>Sent Box</button>    
@@ -31,7 +32,7 @@ const Home=()=>{
                     <div className={styles.userSectionRight}>
                         {userinput.newmail && <MailPage/>}
                         {userinput.sentbox && <p>SentBox</p>}
-                        {userinput.inbox && <p>Inbox</p>}
+                        {userinput.inbox && <Inbox/>}
                     </div>
                 
                 </div>
