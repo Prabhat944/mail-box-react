@@ -1,4 +1,5 @@
 .container{
+    min-width:390px;
     width:calc(100vw - 27vw);
     height: calc(100vh - 120px);
     padding:15px;
@@ -18,6 +19,7 @@
   padding:0;
   margin: 0;
   padding: 10px 10px;
+  overflow: auto;
 }
 .title{
     text-align: center;

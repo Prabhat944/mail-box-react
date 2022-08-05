@@ -1,13 +1,14 @@
 import {Switch,Route, Redirect} from 'react-router-dom';
-import Layout from "./components/layout/Layout";
-import Login from "./components/pages/Login";
-import Home from "./components/pages/Home";
-import ForgetPassword from './components/pages/ForgetPassword';
-import NotReady from './components/pages/NotReady';
-import { useEffect,useState } from 'react';
+import React, { Suspense, useEffect,useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { updateinbox, UpdateSentBoxMsg} from './store/MailAction';
 import { userAction } from './store/userServer';
+import Layout from "./components/layout/Layout";
+
+const Login=React.lazy(()=> import("./components/pages/Login"));
+const ForgetPassword=React.lazy(()=> import('./components/pages/ForgetPassword'));
+const Home=React.lazy(()=>import("./components/pages/Home"));
+const NotReady=React.lazy(()=>import('./components/pages/NotReady'));
 
 const start=true;
 const token=localStorage.getItem('Token');
@@ -44,6 +45,7 @@ function App() {
 
   return (
      <Layout isLogin={isLogin} logout={LogoutHandler}>
+      <Suspense fallback={<div className='spinnerBody'><div className='spinner'></div></div>}>
       <Switch>
         <Route path='/' exact>
             <Redirect to='/login'/>
@@ -63,6 +65,7 @@ function App() {
           {!isLogin && <Redirect to='/login'/>}
         </Route>
       </Switch>
+      </Suspense>
      </Layout>
   );
 }

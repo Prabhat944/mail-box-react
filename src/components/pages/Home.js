@@ -34,9 +34,9 @@ const Home=()=>{
                         </div>
                     </div>
                     <div className={styles.userSectionRight}>
-                        {userinput.newmail && <MailPage/>}
-                        {userinput.sentbox && <SentBox />}
-                        {userinput.inbox && <Inbox/>}
+                             {userinput.newmail && <MailPage/>}
+                             {userinput.sentbox && <SentBox />}
+                             {userinput.inbox && <Inbox/>} 
                     </div>
                 
                 </div>

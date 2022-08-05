@@ -27,6 +27,10 @@ const MailPage=(props)=>{
             message:message,
             seen:false
         }
+        if(user === email){
+            alert('Please Choose a Different Mail othen than yourself !!');
+            return;
+        }
         const ToEmail=email.replace(/[^a-zA-Z0-9]/g,'');
         const userEmail=user.replace(/[^a-zA-Z0-9]/g,'');
         dispatch(userAction.updatestatus({type:'loading',msg:"...Loading"}));
@@ -42,10 +46,10 @@ const MailPage=(props)=>{
             <form className={styles.form} onSubmit={SendMailHandler}>
                 <div className={styles.toemail}>
                     <span className={styles.to}>To</span>
-                    <input type='email' className={styles.email} ref={EmailRef}/>
+                    <input type='email' className={styles.email} ref={EmailRef} required/>
                     <span className={styles.sometext}>Cc/Bcc</span>
                 </div>
-                <div className={styles.subject}><input  type='text' placeholder='Subject' ref={SubjectRef}/></div>
+                <div className={styles.subject}><input  type='text' placeholder='Subject' ref={SubjectRef} required/></div>
                 <div className={styles.middlebody} >
                     <CKEditor 
                         editor={ClassicEditor}
