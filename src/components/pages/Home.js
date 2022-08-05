@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import MailPage from './MailPage';
-import Inbox from './Inbox';
+import MailPage from '../helper/MailPage';
+import Inbox from '../helper/Inbox';
 import styles from './Home.module.css';
 import { useSelector } from 'react-redux';
 const Home=()=>{

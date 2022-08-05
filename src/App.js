@@ -18,13 +18,14 @@ function App() {
   const update=useSelector(state=>state.user.update);
 
   useEffect(()=>{
-    const user=email.replace(/[^a-zA-z0-9]/g,'');
+    if(email)
+    {const user=email.replace(/[^a-zA-z0-9]/g,'');
     setTimeout(()=>{
       if(user){dispatch(updateinbox(user));}
        },500);
     setTimeout(()=>{
         dispatch(userAction.update());
-       },10000);
+       },10000);}
   },[dispatch,email,update])
 
   useEffect(()=>{
@@ -34,8 +35,6 @@ function App() {
   const LogoutHandler=()=>{
     setIsLogin(false);
   }
- 
-  console.log(isLogin);
 
 
   return (

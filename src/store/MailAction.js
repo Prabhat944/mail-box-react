@@ -4,20 +4,18 @@ export const SendMail=(ToEmail,body)=>{
 
     return async(dispatch)=>{
         const SendingMail=async()=>{
-            const response=await fetch(`https://mail-box-7373c-default-rtdb.firebaseio.com/${ToEmail}/email.json`,{
+            await fetch(`https://mail-box-7373c-default-rtdb.firebaseio.com/${ToEmail}/email.json`,{
                 method:'POST',
                 body:JSON.stringify(body),
-            });
-            if(!response.ok){
-                dispatch(userAction.updatestatus({type:'failed',msg:"Failed"}));
-                throw new Error('Failed to send Email');
-            }
-            const data =response.json();
-            return data
+            })
+            .then(res=>{
+                if(res.ok){
+                   return res.json().then(data=>dispatch(userAction.updatestatus({type:'success',msg:"Successfully Sent"})))
+                }
+            }).catch(err=>dispatch(userAction.updatestatus({type:'failed',msg:"Failed To Send"})))
         }
-        try{const mailOutput=await SendingMail();
-        console.log('SuccessFuly Sent',mailOutput);
-        dispatch(userAction.updatestatus({type:'success',msg:"Successfully Sent"}))}
+        try{await SendingMail();
+        }
         catch{
             throw new Error('Failed');
             
@@ -69,20 +67,19 @@ export const updateSeenMsg=(user,id,body)=>{
     }
 }
 
-export const SentBox=(username,id)=>{
+export const DeleteFromInbox=(username,id)=>{
     return async(dispatch)=>{
         const Inbox=async()=>{
-            const Response=await fetch(`https://mail-box-7373c-default-rtdb.firebaseio.com/${username}/email/${id}.json`);
-            if(!Response.ok){
-                throw new Error('unable to fetch messsage');
-            }
-            const data=Response.json();
-            return data;
+            await fetch(`https://mail-box-7373c-default-rtdb.firebaseio.com/${username}/email/${id}.json`,{
+                method:'DELETE'
+            })
+            .then(res=>{
+                if(res.ok){
+                   res.json().then(data=>dispatch(userAction.updatestatus({type:'success',msg:'Deleted Succesfully'})))
+                }
+            })
+            .catch(err=>{dispatch(userAction.updatestatus({type:'failed',msg:'Failed to Delete from server'}))})
         }
-        try{const output=await Inbox();
-        console.log(output);}
-        catch{
-            throw new Error('Error unable to fetch');
-        }
+        await Inbox()
     }
 };

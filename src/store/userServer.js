@@ -47,6 +47,11 @@ const userSlice=createSlice({
         },
         update(state){
             state.update=state.update+1;
+        },
+        deletenessage(state,action){
+            const current=action.payload;
+            state.inbox=state.inbox.filter(msg=>msg.id !== current.id);
+            
         }
 
     }

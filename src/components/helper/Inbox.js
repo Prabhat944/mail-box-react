@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {useState} from 'react';
 import styles from './Inbox.module.css';
 import Message from './Message';
-import { updateSeenMsg } from '../../store/MailAction';
+import { DeleteFromInbox, updateSeenMsg } from '../../store/MailAction';
 import { userAction } from '../../store/userServer';
 const Inbox=()=>{
     const [openmessage,setOpenmessage]=useState(false);
@@ -18,15 +18,22 @@ const Inbox=()=>{
         dispatch(userAction.updatecount(item));
        }
     }
+    const DeleteHandler=(item)=>{
+        const user=item.email.replace(/[^a-zA-Z0-9]/g,'');
+        dispatch(DeleteFromInbox(user,item.id));
+        dispatch(userAction.updatestatus({type:'loading',msg:'...Loading'}));
+        dispatch(userAction.deletenessage(item));
+        setOpenmessage(false);
+    }
     const inboxItem=useSelector(state=>state.user.inbox);
     const inboxMessage=inboxItem.map((item)=>(
                 <li 
                 className={styles.messageList}
-                onClick={()=>open(item)} 
                 key={item.id} 
                 item={item}>
                 <div className={item.seen? styles.seen : styles.notseen}></div>
-                {item.email} ({item.subject})
+                <span onClick={()=>open(item)}>{item.email} :- {item.subject}</span>
+                <span className={styles.delete} onClick={()=>DeleteHandler(item)}>delete</span>
                 </li>))
 
           
@@ -37,7 +44,7 @@ return(
                 {inboxMessage}
             </ul>
         </div>
-        {openmessage && <Message item={message} onCancel={()=>setOpenmessage(false)}/>}
+        {openmessage && <Message item={message} onCancel={()=>setOpenmessage(false)} delete={()=>DeleteHandler(message)}/>}
         
     </div>
 )

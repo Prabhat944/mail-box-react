@@ -19,6 +19,7 @@ const Message=(props)=>{
                 <div className={styles.bottomsection}>
                     <span className={styles.body}>{text}</span>
                 </div>
+                <div className={styles.delete}><button onClick={props.delete}>Delete</button></div>
             </div>
         </Model>
     )
