@@ -1,41 +1,41 @@
 import styles from './MailPage.module.css';
-import TextEditor from '../UI/TextEditor';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { useRef, useState } from 'react';
-import { useDispatch} from 'react-redux';
-import { SendMail } from '../../store/MailAction';
+import { useDispatch, useSelector} from 'react-redux';
+import { SendMail, SentBoxMsg } from '../../store/MailAction';
 import { userAction } from '../../store/userServer';
-import { useHistory } from 'react-router-dom';
-
- 
-const config={
-    buttons:['bold','italic','underline','link','unlink','source','fullsize','redo','undo','ol','ul','font','image'],
-    placeholder:'body',
-    
-};
 
 
 const MailPage=(props)=>{
     const dispatch=useDispatch();
-    const history=useHistory();
-    const [value,setValue]=useState('');
+    const [text,setText]=useState('');
     const EmailRef=useRef();
     const SubjectRef=useRef();
+    const user=useSelector(state=>state.auth.email);
+    const prevSentMsg=useSelector(state=>state.user.sentBox);
 
     const SendMailHandler=(event)=>{
         event.preventDefault();
         const email=EmailRef.current.value;
         const subject=SubjectRef.current.value;
-        const message=value;
+        const message=text;
         const body={
-            email:email,
+            sender:user,
+            reciever:email,
             subject:subject,
             message:message,
             seen:false
         }
         const ToEmail=email.replace(/[^a-zA-Z0-9]/g,'');
+        const userEmail=user.replace(/[^a-zA-Z0-9]/g,'');
         dispatch(userAction.updatestatus({type:'loading',msg:"...Loading"}));
        dispatch(SendMail(ToEmail,body));
-        history.push('/login/home');
+       dispatch(SentBoxMsg(userEmail,[...prevSentMsg,{...body,id:Math.random().toString()}]));
+       EmailRef.current.value='';
+       SubjectRef.current.value='';
+       setText('');
+       
     }
     return(
         <div className={styles.container}>
@@ -47,9 +47,12 @@ const MailPage=(props)=>{
                 </div>
                 <div className={styles.subject}><input  type='text' placeholder='Subject' ref={SubjectRef}/></div>
                 <div className={styles.middlebody} >
-                    <TextEditor  
-                        setValue={setValue}
-                        config={config}
+                    <CKEditor 
+                        editor={ClassicEditor}
+                        data={text}
+                        onChange={(event,editor)=>{
+                            const data=editor.getData()
+                            setText(data)}}
                     />
                 </div>
                 <div className={styles.lowerbody}>

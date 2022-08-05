@@ -11,15 +11,15 @@ const Inbox=()=>{
     const open=(item)=>{
        setOpenmessage(true);
        setMessage(item);
-    
+       
        if(item.seen === false){
-        const user=item.email.replace(/[^a-zA-Z0-9]/g,'');
+        const user=item.reciever.replace(/[^a-zA-Z0-9]/g,'');
         dispatch(updateSeenMsg(user,item.id,{...item,seen:true}));
         dispatch(userAction.updatecount(item));
        }
     }
     const DeleteHandler=(item)=>{
-        const user=item.email.replace(/[^a-zA-Z0-9]/g,'');
+        const user=item.reciever.replace(/[^a-zA-Z0-9]/g,'');
         dispatch(DeleteFromInbox(user,item.id));
         dispatch(userAction.updatestatus({type:'loading',msg:'...Loading'}));
         dispatch(userAction.deletenessage(item));
@@ -32,7 +32,7 @@ const Inbox=()=>{
                 key={item.id} 
                 item={item}>
                 <div className={item.seen? styles.seen : styles.notseen}></div>
-                <span onClick={()=>open(item)}>{item.email} :- {item.subject}</span>
+                <span onClick={()=>open(item)} className={styles.mailText}><h3>{item.sender}</h3> :- {item.subject}</span>
                 <span className={styles.delete} onClick={()=>DeleteHandler(item)}>delete</span>
                 </li>))
 
@@ -41,6 +41,7 @@ return(
     <div className={styles.container}>
         <div className={styles.inbox}>
             <ul className={styles.message}>
+                <div className={styles.title}><span>RECIEVED MESSAGES</span></div>
                 {inboxMessage}
             </ul>
         </div>

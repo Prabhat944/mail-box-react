@@ -1,0 +1,65 @@
+.container{
+    width:calc(100vw - 27vw);
+    height:calc(100vh - 120px);
+    padding: 15px;
+    margin: auto;
+}
+.sentbox{
+    margin: auto;
+    border:1px solid orangered;
+    border-radius: 15px;
+    padding: 10px;
+}
+.message{
+    margin: 0;
+    padding:0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+.title{
+    text-align: center;
+    color:orangered;
+    font-weight: bolder;
+    height:40px;
+    border-bottom: 1.5px solid orangered;
+}
+.sent{
+    border-bottom: 1.5px solid orangered;
+    border-radius: 7px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.sent:hover{
+    background-color: orangered;
+}
+.text{
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    
+}
+.mailText{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap:10px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+.delete{
+    position: absolute;
+    right:20px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: underline;
+    cursor: pointer;
+    color:blue;
+}
+.delete:hover,
+.delete:focus{
+    color: white;
+}

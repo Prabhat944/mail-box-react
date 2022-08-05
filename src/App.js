@@ -6,9 +6,10 @@ import ForgetPassword from './components/pages/ForgetPassword';
 import NotReady from './components/pages/NotReady';
 import { useEffect,useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { updateinbox} from './store/MailAction';
+import { updateinbox, UpdateSentBoxMsg} from './store/MailAction';
 import { userAction } from './store/userServer';
 
+const start=true;
 const token=localStorage.getItem('Token');
 function App() {
   const [isLogin,setIsLogin]=useState(token?true:false);
@@ -18,6 +19,10 @@ function App() {
   const update=useSelector(state=>state.user.update);
 
   useEffect(()=>{
+    if(email && start){
+      const user=email.replace(/[^a-zA-z0-9]/g,'');
+      dispatch(UpdateSentBoxMsg(user))
+    }
     if(email)
     {const user=email.replace(/[^a-zA-z0-9]/g,'');
     setTimeout(()=>{

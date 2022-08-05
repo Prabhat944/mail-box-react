@@ -3,6 +3,8 @@ import MailPage from '../helper/MailPage';
 import Inbox from '../helper/Inbox';
 import styles from './Home.module.css';
 import { useSelector } from 'react-redux';
+import SentBox from '../helper/SentBox';
+
 const Home=()=>{
    const [userinput,setUserInput]=useState({
       newmail:false,
@@ -33,7 +35,7 @@ const Home=()=>{
                     </div>
                     <div className={styles.userSectionRight}>
                         {userinput.newmail && <MailPage/>}
-                        {userinput.sentbox && <p>SentBox</p>}
+                        {userinput.sentbox && <SentBox />}
                         {userinput.inbox && <Inbox/>}
                     </div>
                 

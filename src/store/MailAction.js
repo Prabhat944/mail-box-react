@@ -83,3 +83,36 @@ export const DeleteFromInbox=(username,id)=>{
         await Inbox()
     }
 };
+
+export const SentBoxMsg=(user,msg)=>{
+    return async(dispatch)=>{
+        await fetch(`https://mail-box-7373c-default-rtdb.firebaseio.com/${user}/sent.json/`,{
+            method:'PUT',
+            body:JSON.stringify(msg)
+        }).then(res=>{
+            if(res.ok){
+                res.json().then(data=>{
+                    dispatch(userAction.updateSentBox(data));
+                    dispatch(userAction.updatestatus({type:'success',msg:'sentBox updated'}))
+                })
+            }
+        })
+        .catch(err=>
+            console.log('Failed to update SentBox')
+        )
+    }
+}
+
+export const UpdateSentBoxMsg=(user)=>{
+    return async(dispatch)=>{
+        await fetch(`https://mail-box-7373c-default-rtdb.firebaseio.com/${user}/sent.json/`)
+        .then(res=>{
+            if(res.ok){
+                res.json().then(data=>dispatch(userAction.updateSentBox(data)))
+            }
+        })
+        .catch(err=>
+            console.log('Failed to update SentBox')
+        )
+    }
+}

@@ -1,10 +1,13 @@
 .container{
-    padding: 10px;
-    padding-right: 20px;
+    width:calc(100vw - 27vw);
+    height: calc(100vh - 120px);
+    padding:15px;
+    margin: auto;
 }
 .inbox{
     border:1px solid orangered;
-    border-radius: 13px;
+    border-radius: 15px;
+    margin: auto;
 }
 .message{
   list-style: none;
@@ -16,50 +19,68 @@
   margin: 0;
   padding: 10px 10px;
 }
+.title{
+    text-align: center;
+    color:orangered;
+    font-weight: bolder;
+    height:40px;
+    border-bottom: 1.5px solid orangered;
+}
 .message li{
-    border: none;
     border-bottom:1.5px solid orangered;
+    height:30px;
     border-radius: 7px;
     padding-left: 5px;
-    font-size: 17px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 500;
     position: relative;
 }
 .messageList{
-    cursor: pointer;
     margin-left: 10px;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 .messageList:hover,
 .messageList:focus{
-    cursor: pointer;
     background-color: orangered;
 }
+.mailText{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.mailText h3{
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+}
 .delete{
-    background-color: transparent;
     color:blue;
     text-decoration: underline;
     font-size: 15px;
     position: absolute;
     right:20px;
+    cursor: pointer;
 }
 .delete:hover{
     color:white;
 }
 .seen{
-    width:10px;
-    height:10px;
-    border-radius: 5px;
+    width:12px;
+    height:12px;
+    border-radius: 50%;
     background-color: white;
     position: relative;
-    top: 17px;
-    right:15px;
+    right:10px;
+    top:3px;
 }
 .notseen{
-    width:10px;
-    height:10px;
-    border-radius: 5px;
+    width:12px;
+    height:12px;
+    border-radius: 50%;
     background-color:blue;
     position: relative;
-    top: 17px;
-    right:15px;
+    right:10px;
+    top:3px;
 }

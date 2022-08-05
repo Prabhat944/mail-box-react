@@ -52,6 +52,9 @@ const userSlice=createSlice({
             const current=action.payload;
             state.inbox=state.inbox.filter(msg=>msg.id !== current.id);
             
+        },
+        updateSentBox(state,action){
+            state.sentBox=action.payload || [];
         }
 
     }
