@@ -31,3 +31,17 @@
     animation: slide-down 300ms ease-out forwards;
 
 }
+@media(min-width:360px) and (max-width:600px){
+    .backdrop{
+        top:150px;
+        height: 100%;
+        z-index: 50;
+    }
+    .content{
+        min-height: 550px;
+        min-width: 400px;
+        margin: auto;
+        top:200px;
+        z-index: 60;
+    }
+}

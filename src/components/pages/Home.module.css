@@ -65,3 +65,26 @@
     font-size: 19px;
     right:15%;
 }
+@media(max-width:595px){
+    .userSection{
+        flex-direction: column;
+        width: 600px;
+    }
+    .userSectionLeft{
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        border-left: 2px solid orangered;
+    }
+    .userSectionRight{
+        width:100%;
+    }
+    .left button{
+        width:150px;
+        height:35px;
+       
+    }
+}

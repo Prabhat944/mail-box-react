@@ -89,3 +89,12 @@
     color: white;
     font-size: 18px;
 }
+@media(max-width:600px){
+    .container{
+        width:90%;
+        margin: auto;
+    }
+    .form{
+        width:90%;
+    }
+}

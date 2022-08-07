@@ -1,6 +1,14 @@
 .body{
+    position: relative;
     min-width: 530px;
     width: 100vw;
     min-height:calc(100vh - 60px);
     background-color: rgb(250, 239, 216);
+}
+@media(max-width:600px){
+    .body{
+        width:600px;
+        height:1000px;
+        
+    }
 }

@@ -48,3 +48,10 @@ code {
     transform: rotate(360deg);
   }
 }
+
+@media(max-width:600px){
+  .spinnerBody{
+    width:600px;
+    
+  }
+}

@@ -95,3 +95,37 @@
     height: 100%;
     background-color: rgb(74, 74, 208);
 }
+
+@media(max-width:600px){
+    .navigation{
+        flex-direction: column;
+        height: 150px;
+        width:600px;
+    }
+    .logoContainer{
+        height: 60px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 2px solid white;
+    }
+    .pagesContainer{
+        height: 40px;
+        width: 100%;
+       
+        border-bottom: 2px solid white;
+    }
+    .pagesContainer ul{
+        display: flex;
+        justify-content:space-evenly;
+    }
+    .home,
+    .product,
+    .about{
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .isLogin{
+        height: 50px;
+        width:100%;
+    }
+}

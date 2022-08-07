@@ -86,3 +86,23 @@
     right:10px;
     top:3px;
 }
+@media(min-width:360px) and (max-width:600px){
+    .container{
+        width:90%;
+    }
+    .mailText{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .messageList{
+        min-height: 50px;
+        height: fit-content;
+    }
+    .mailText h3{
+        margin: 0;
+    }
+    .delete{
+        bottom: 10px;
+    }
+}

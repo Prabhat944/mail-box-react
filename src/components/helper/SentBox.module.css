@@ -63,3 +63,24 @@
 .delete:focus{
     color: white;
 }
+
+@media(max-width:600px){
+    .container{
+        width:90%;
+    }
+    .mailText{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .sent{
+        min-height: 50px;
+        height: fit-content;
+    }
+    .mailText h3{
+        margin: 0;
+    }
+    .delete{
+        bottom: 10px;
+    }
+}
